@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900 dark:bg-surface-dark dark:text-white antialiased transition-colors duration-300;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2.5 px-6 rounded-lg transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-danger {
+    @apply bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 px-6 rounded-lg transition-all duration-200 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white font-semibold py-2.5 px-6 rounded-lg transition-all duration-200 border border-gray-200 dark:border-white/10;
+  }
+
+  .input-field {
+    @apply w-full bg-gray-50 border border-gray-300 dark:bg-white/5 dark:border-white/10 rounded-lg px-4 py-2.5 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/40 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all;
+  }
+
+  .card {
+    @apply bg-white dark:bg-card-dark border border-gray-200 dark:border-white/10 rounded-xl p-6 shadow-sm dark:shadow-none transition-colors duration-300;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-gray-600 dark:text-white/60 mb-1;
+  }
+
+  .select-field {
+    @apply bg-gray-50 border border-gray-300 dark:bg-white/5 dark:border-white/10 rounded-lg px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all appearance-none cursor-pointer text-sm;
+  }
+}
