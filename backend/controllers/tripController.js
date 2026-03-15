@@ -34,10 +34,9 @@ const getTrips = async (req, res, next) => {
     const {
       search = "",
       status = "",
-      sortBy = "date",
-      order = "desc",
+      sort = "newest",
       page = 1,
-      limit = 12,
+      limit = 6,
     } = req.query;
 
     // --- Base filter: only current user's trips ---
@@ -61,16 +60,19 @@ const getTrips = async (req, res, next) => {
     }
 
     // --- Sort ---
-    const sortField = sortBy === "budget" ? "totalBudget" : "createdAt";
-    const sortOrder = order === "asc" ? 1 : -1;
+    let sortOption = { createdAt: -1 };
+    if (sort === "newest") sortOption = { createdAt: -1 };
+    if (sort === "oldest") sortOption = { createdAt: 1 };
+    if (sort === "budget_high") sortOption = { totalBudget: -1 };
+    if (sort === "budget_low") sortOption = { totalBudget: 1 };
 
     // --- Pagination ---
     const pageNum = Math.max(1, parseInt(page, 10) || 1);
-    const limitNum = Math.max(1, Math.min(50, parseInt(limit, 10) || 12));
+    const limitNum = Math.max(1, Math.min(50, parseInt(limit, 10) || 6));
     const skip = (pageNum - 1) * limitNum;
 
     const [trips, total] = await Promise.all([
-      Trip.find(query).sort({ [sortField]: sortOrder }).skip(skip).limit(limitNum),
+      Trip.find(query).sort(sortOption).skip(skip).limit(limitNum),
       Trip.countDocuments(query),
     ]);
 
@@ -80,6 +82,7 @@ const getTrips = async (req, res, next) => {
       totalPages: Math.ceil(total / limitNum),
       currentPage: pageNum,
       data: trips,
+      totalTrips: total,
     });
   } catch (error) {
     next(error);
