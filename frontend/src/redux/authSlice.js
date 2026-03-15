@@ -1,7 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import API from "../services/api";
 
-const user = JSON.parse(localStorage.getItem("user"));
+let user = null;
+try {
+  const stored = localStorage.getItem("user");
+  if (stored) user = JSON.parse(stored);
+} catch (_) {
+  localStorage.removeItem("user");
+}
 
 export const registerUser = createAsyncThunk(
   "auth/register",

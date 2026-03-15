@@ -25,7 +25,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="h-[64px] bg-white dark:bg-[#0A0F1E] sticky top-0 z-50 backdrop-blur-md bg-opacity-80 dark:bg-opacity-80 border-b border-gray-200 dark:border-transparent transition-all duration-300">
+    <nav className="h-[64px] bg-white/70 dark:bg-[#0A0F1E]/70 sticky top-0 z-50 backdrop-blur-xl border-b border-white/20 dark:border-white/10 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
         {/* Left Side */}
         <Link to="/" className="flex items-center relative group z-50 hover:opacity-90 transition-opacity">
