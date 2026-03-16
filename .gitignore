@@ -126,3 +126,6 @@ frontend/dist/
 frontend/node_modules/
 backend/node_modules/
 .env
+frontend/.vite/
+frontend/postcss.config.cjs
+frontend/tailwind.config.cjs
