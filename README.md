@@ -10,8 +10,16 @@
 
 ---
 
-## Overview
+## Live Demo
 
+| Service | URL |
+|---------|-----|
+| Frontend (Netlify) | https://safar-sathii.netlify.app |
+| Backend API (Render) | https://safarsathi-backend-0ndc.onrender.com |
+
+---
+
+## Overview
 
 SafarSathi is a full stack travel itinerary planning web application. It consolidates trip planning, activity scheduling, budget tracking, and itinerary sharing into a single platform — replacing the need for multiple disconnected tools.
 
@@ -50,7 +58,7 @@ Built with React.js, Node.js, Express.js, and MongoDB as part of a Full Stack Ha
 | Backend | Node.js, Express.js |
 | Database | MongoDB with Mongoose ODM |
 | Authentication | JWT (JSON Web Tokens) |
-| Deployment | Vercel (frontend), Render (backend), MongoDB Atlas (database) |
+| Deployment | Netlify (frontend), Render (backend), MongoDB Atlas (database) |
 
 ---
 
@@ -209,7 +217,7 @@ Frontend will run at `http://localhost:3000`
 
 | Variable | Description | Example |
 |----------|-------------|---------|
-| `VITE_API_URL` | Backend API base URL | `http://localhost:5000/api` |
+| `VITE_API_URL` | Backend API base URL | `https://safarsathi-backend-0ndc.onrender.com/api` |
 
 ---
 
@@ -218,7 +226,7 @@ Frontend will run at `http://localhost:3000`
 ### Base URL
 
 ```
-http://localhost:5000/api
+https://safarsathi-backend-0ndc.onrender.com/api
 ```
 
 ---
@@ -375,7 +383,21 @@ The backend uses a global error middleware (`errorMiddleware.js`) to catch and f
 
 ## Deployment
 
+### Frontend — Netlify
+
+**Live URL:** https://safar-sathii.netlify.app
+
+1. Go to [netlify.com](https://netlify.com) and connect GitHub repository.
+2. Set the following build settings:
+   - Base Directory: `frontend`
+   - Build Command: `npm run build`
+   - Publish Directory: `frontend/dist`
+3. Add environment variable:
+   - `VITE_API_URL=https://safarsathi-backend-0ndc.onrender.com/api`
+
 ### Backend — Render
+
+**Live URL:** https://safarsathi-backend-0ndc.onrender.com
 
 1. Go to [render.com](https://render.com) and create a new Web Service.
 2. Connect the GitHub repository.
@@ -388,17 +410,6 @@ The backend uses a global error middleware (`errorMiddleware.js`) to catch and f
    - `JWT_SECRET`
    - `NODE_ENV=production`
    - `PORT=5000`
-
-### Frontend — Vercel
-
-1. Go to [vercel.com](https://vercel.com) and import the GitHub repository.
-2. Set the following:
-   - Framework: Vite
-   - Root Directory: `frontend`
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-3. Add environment variable:
-   - `VITE_API_URL=https://your-backend.onrender.com/api`
 
 ### Database — MongoDB Atlas
 
