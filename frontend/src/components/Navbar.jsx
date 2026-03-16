@@ -26,9 +26,9 @@ const Navbar = () => {
 
   return (
     <nav className="h-[64px] bg-white/70 dark:bg-[#0A0F1E]/70 sticky top-0 z-50 backdrop-blur-xl border-b border-white/20 dark:border-white/10 transition-all duration-300">
-      <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
+      <div className="flex items-center justify-between h-full px-4 mx-auto max-w-7xl">
         {/* Left Side */}
-        <Link to="/" className="flex items-center relative group z-50 hover:opacity-90 transition-opacity">
+        <Link to="/" className="relative z-50 flex items-center transition-opacity group hover:opacity-90">
           <span className="text-2xl font-extrabold tracking-tight">
             <span className="text-gray-900 dark:text-white">Safar</span>
             <span className="bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] bg-clip-text text-transparent">
@@ -38,7 +38,7 @@ const Navbar = () => {
         </Link>
 
         {/* Center (Desktop only) */}
-        <div className="hidden md:flex items-center gap-8 h-full">
+        <div className="items-center hidden h-full gap-8 md:flex">
           {user && navLinks.map((link) => {
             const isActive = location.pathname === link.path;
             return (
@@ -60,11 +60,10 @@ const Navbar = () => {
           })}
         </div>
 
-        {/* Right Side */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="items-center hidden gap-6 md:flex">
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="p-2 transition-colors duration-200 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
             aria-label="Toggle theme"
           >
             {dark ? <Moon size={20} className="text-indigo-400" /> : <Sun size={20} className="text-amber-400" />}
@@ -77,28 +76,27 @@ const Navbar = () => {
               </span>
               <button
                 onClick={handleLogout}
-                className="px-4 py-2 text-sm font-semibold rounded-lg border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:bg-indigo-600 hover:border-indigo-500 hover:text-white dark:hover:bg-indigo-600 dark:hover:border-indigo-500 dark:hover:text-white transition-colors duration-200"
+                className="px-4 py-2 text-sm font-semibold text-gray-600 transition-colors duration-200 border border-gray-300 rounded-lg dark:border-gray-600 dark:text-gray-300 hover:bg-indigo-600 hover:border-indigo-500 hover:text-white dark:hover:bg-indigo-600 dark:hover:border-indigo-500 dark:hover:text-white"
               >
                 Logout
               </button>
             </div>
           ) : (
              <div className="flex items-center gap-4">
-              <Link to="/login" className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+              <Link to="/login" className="text-sm font-medium text-gray-600 transition-colors duration-200 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
                 Login
               </Link>
-              <Link to="/register" className="px-4 py-2 text-sm font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors duration-200">
+              <Link to="/register" className="px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 bg-indigo-600 rounded-lg hover:bg-indigo-700">
                 Register
               </Link>
             </div>
           )}
         </div>
 
-        {/* Mobile Hamburger */}
-        <div className="flex items-center gap-4 md:hidden z-50">
+        <div className="z-50 flex items-center gap-4 md:hidden">
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="p-2 transition-colors duration-200 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
           >
             {dark ? <Moon size={20} className="text-indigo-400" /> : <Sun size={20} className="text-amber-400" />}
           </button>
@@ -125,8 +123,8 @@ const Navbar = () => {
           menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="p-6 flex-1 flex flex-col">
-          <Link to="/" onClick={() => setMenuOpen(false)} className="flex items-center mb-10 hover:opacity-90 transition-opacity">
+        <div className="flex flex-col flex-1 p-6">
+          <Link to="/" onClick={() => setMenuOpen(false)} className="flex items-center mb-10 transition-opacity hover:opacity-90">
             <span className="text-2xl font-extrabold tracking-tight">
               <span className="text-gray-900 dark:text-white">Safar</span>
               <span className="bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] bg-clip-text text-transparent">
@@ -135,10 +133,10 @@ const Navbar = () => {
             </span>
           </Link>
           
-          <div className="flex flex-col gap-6 flex-1">
+          <div className="flex flex-col flex-1 gap-6">
             {user ? (
               <>
-                <div className="pb-6 border-b border-gray-200 dark:border-gray-800 mb-2 text-sm font-medium text-gray-600 dark:text-gray-300">
+                <div className="pb-6 mb-2 text-sm font-medium text-gray-600 border-b border-gray-200 dark:border-gray-800 dark:text-gray-300">
                   Hi, {user.name}
                 </div>
                 {navLinks.map(link => {
@@ -161,10 +159,10 @@ const Navbar = () => {
               </>
             ) : (
                <>
-                <Link to="/login" onClick={() => setMenuOpen(false)} className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+                <Link to="/login" onClick={() => setMenuOpen(false)} className="text-lg font-medium text-gray-600 transition-colors duration-200 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
                   Login
                 </Link>
-                <Link to="/register" onClick={() => setMenuOpen(false)} className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+                <Link to="/register" onClick={() => setMenuOpen(false)} className="text-lg font-medium text-gray-600 transition-colors duration-200 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
                   Register
                 </Link>
               </>
@@ -172,10 +170,10 @@ const Navbar = () => {
           </div>
 
           {user && (
-             <div className="mt-auto pt-6 border-t border-gray-200 dark:border-gray-800">
+             <div className="pt-6 mt-auto border-t border-gray-200 dark:border-gray-800">
               <button
                 onClick={() => { handleLogout(); setMenuOpen(false); }}
-                className="w-full py-3 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 font-semibold hover:bg-indigo-600 hover:border-indigo-500 hover:text-white dark:hover:bg-indigo-600 dark:hover:border-indigo-500 dark:hover:text-white transition-colors duration-200"
+                className="w-full py-3 font-semibold text-gray-600 transition-colors duration-200 border border-gray-300 rounded-xl dark:border-gray-600 dark:text-gray-300 hover:bg-indigo-600 hover:border-indigo-500 hover:text-white dark:hover:bg-indigo-600 dark:hover:border-indigo-500 dark:hover:text-white"
               >
                 Logout
               </button>
