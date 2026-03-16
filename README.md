@@ -1,289 +1,444 @@
-# ✈️ SafarSathi — Your Travel Companion
-
-<div align="center">
-
-![SafarSathi](https://img.shields.io/badge/SafarSathi-Travel%20Itinerary%20Builder-4F46E5?style=for-the-badge&logo=airplanemodeactive)
-![Status](https://img.shields.io/badge/Status-Active%20Development-22C55E?style=for-the-badge)
-![Hackathon](https://img.shields.io/badge/Full%20Stack-Hackathon%20Project-F59E0B?style=for-the-badge)
-
-<br/>
-
-> **"The average traveler uses 5+ different apps to plan a single trip. SafarSathi replaces them all."**
-
-<br/>
+# SafarSathi — Travel Itinerary Builder
 
 [![React](https://img.shields.io/badge/React-18.x-61DAFB?style=flat-square&logo=react&logoColor=white)](https://reactjs.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-18.x-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![Express](https://img.shields.io/badge/Express-4.x-000000?style=flat-square&logo=express&logoColor=white)](https://expressjs.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-6.x-47A248?style=flat-square&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![Redux](https://img.shields.io/badge/Redux_Toolkit-2.x-764ABC?style=flat-square&logo=redux&logoColor=white)](https://redux-toolkit.js.org/)
+[![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-2.x-764ABC?style=flat-square&logo=redux&logoColor=white)](https://redux-toolkit.js.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 
-</div>
+---
+
+## Overview
+
+SafarSathi is a full stack travel itinerary planning web application. It consolidates trip planning, activity scheduling, budget tracking, and itinerary sharing into a single platform — replacing the need for multiple disconnected tools.
+
+Built with React.js, Node.js, Express.js, and MongoDB as part of a Full Stack Hackathon project.
 
 ---
 
-## 🧭 Executive Summary
+## Features
 
-**SafarSathi** is a full stack web application designed to eliminate the friction and frustration of modern travel planning. By consolidating itinerary management, hotel tracking, activity scheduling, budget monitoring, and trip sharing into a single cohesive platform, SafarSathi empowers travelers to plan smarter, stay organized, and travel with confidence.
-
-This project is built using **React.js**, **Node.js**, **Express.js**, and **MongoDB** — delivering a responsive, secure, and scalable solution for real-world travel planning challenges.
-
----
-
-## 🎯 Problem Statement
-
-### 📖 Background & Context
-
-Travel planning today is fundamentally broken. Despite the explosion of travel apps and digital tools over the last decade, the actual process of organizing a multi-day trip remains **fragmented, inefficient, and stressful.**
-
-A typical traveler planning a 7-day trip to a new destination must simultaneously juggle:
-
-| Task | Tool Currently Used |
-|------|-------------------|
-| Finding destinations & routes | Google Maps |
-| Writing the day-by-day itinerary | Notion / Notes / Paper |
-| Tracking hotel bookings | Email confirmations |
-| Managing expenses & budget | Excel / Calculator |
-| Sharing the plan with co-travelers | WhatsApp / Email |
-| Storing activity details | Screenshots / Bookmarks |
-| Remembering restaurant reservations | Separate booking apps |
-
-The result is a chaotic, disconnected planning experience where critical information is scattered across **5 to 7 different applications** — none of which communicate with each other.
+- **Authentication** — Secure register, login, and logout using JWT. Protected routes for authenticated users.
+- **Trip Management** — Create, view, edit, and delete trips with destination, date range, and budget.
+- **Day-wise Itinerary** — Plan activities for each day of a trip with type, location, time, and cost.
+- **Budget Tracker** — Track expenses per trip with category breakdown, progress bar, and over-budget alerts.
+- **Budget Chart** — Visual donut chart showing spending by category using Recharts.
+- **Search, Filter and Sort** — Search trips by title or destination, filter by status, sort by date or budget.
+- **Debouncing** — Search input is debounced at 500ms to reduce unnecessary API calls.
+- **Pagination** — Trip list paginated at 6 per page with page number navigation.
+- **Form Validation** — Real-time validation with error messages and field state indicators.
+- **Toast Notifications** — Success and error notifications using react-hot-toast.
+- **Public Trip Sharing** — Generate a public read-only link for any trip. No login required for viewers.
+- **Dark and Light Mode** — Theme toggle persisted in localStorage.
+- **Responsive Design** — Fully responsive UI for mobile, tablet, and desktop.
 
 ---
 
-### 🔍 Core Problems Identified
+## Tech Stack
 
-After analyzing the travel planning experience, the following **five critical problems** were identified:
-
----
-
-#### ❌ Problem 1 — Fragmented Planning Across Multiple Platforms
-
-Travelers are forced to use a different tool for every aspect of trip planning. There is no integration between a note-taking app, a maps app, a spreadsheet, and a messaging app. When one thing changes — a hotel cancellation, a rescheduled flight — the traveler must manually update every single tool separately. This creates **version conflicts, duplicate effort, and missed updates.**
-
----
-
-#### ❌ Problem 2 — No Real-Time Budget Visibility
-
-Budget tracking during travel is a persistent pain point. Most travelers either:
-- Mentally estimate costs (highly inaccurate), or
-- Maintain a separate Excel sheet that quickly becomes outdated
-
-There is no system that automatically ties expenses to specific days and activities, shows category-wise spending, and alerts the traveler when they are approaching or exceeding their budget. The result is that **many travelers overspend without realizing it until the trip is over.**
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React.js 18, Tailwind CSS, Redux Toolkit, React Router DOM v6 |
+| State Management | Redux Toolkit with async thunks |
+| HTTP Client | Axios with JWT interceptor |
+| Charts | Recharts |
+| Notifications | react-hot-toast |
+| Icons | lucide-react |
+| Backend | Node.js, Express.js |
+| Database | MongoDB with Mongoose ODM |
+| Authentication | JWT (JSON Web Tokens) |
+| Deployment | Vercel (frontend), Render (backend), MongoDB Atlas (database) |
 
 ---
 
-#### ❌ Problem 3 — Inefficient Day-wise Itinerary Management
-
-Planning what to do on each day of a trip requires careful sequencing — considering travel time, opening hours, booking requirements, and meal breaks. Currently, travelers write this in notes or documents with no structure. There is **no standard format, no activity categorization, no time scheduling, and no easy way to reorder or update the plan.**
-
----
-
-#### ❌ Problem 4 — Difficulty Sharing Itineraries With Travel Companions
-
-When traveling in a group, sharing the trip plan is unnecessarily complicated. Sending a WhatsApp message or a long Google Doc is not practical — especially when the plan changes. There is no way to give every group member a clean, up-to-date, read-only view of the complete itinerary **without requiring them to create an account or install an app.**
-
----
-
-#### ❌ Problem 5 — No Centralized Trip History & Reference
-
-After a trip ends, the memories and records are scattered across apps, photos, and chat histories. Travelers have **no organized archive of their past trips** — no way to reference what hotels they stayed at, what they spent, or what activities they did — which makes planning similar future trips much harder.
-
----
-
-### 📊 Impact of the Problem
-
-The consequences of this fragmented planning experience are significant and measurable:
+## Folder Structure
 
 ```
-🧳  67% of travelers report feeling overwhelmed during the planning phase
-                        (Source: Travel Industry Research 2023)
-
-💸  43% of travelers exceed their intended trip budget
-                        (Source: Global Consumer Travel Report)
-
-⏱️  Travelers spend an average of 10+ hours planning a single trip
-                        across multiple disconnected tools
-
-😤  Travel planning stress ranks as the #1 barrier to taking more vacations
-                        among working professionals
-```
-
-These are not minor inconveniences — they represent **real friction that prevents people from enjoying their travel experiences** before they even begin.
-
----
-
-### 👥 Target Users
-
-SafarSathi is designed to serve a broad range of travelers, each with distinct planning needs:
-
-| User Segment | Pain Point | How They Benefit |
-|-------------|-----------|-----------------|
-| 🧳 **Solo Travelers** | No structured way to self-organize multi-day plans | Personal dashboard with full itinerary and budget control |
-| 👨‍👩‍👧 **Families** | Coordinating complex logistics for multiple people | Shared itinerary link keeps everyone aligned in real time |
-| 👫 **Friend Groups** | Reconciling different preferences and splitting planning | Single shared plan with activity categories and day-wise view |
-| 🎒 **Backpackers** | Staying within tight budgets across long trips | Live budget tracker with remaining balance and over-budget alerts |
-| 🏢 **Travel Bloggers** | Documenting and publicly sharing detailed itineraries | Public share link with clean, professional view-only display |
-| 💼 **Business Travelers** | Managing itineraries with frequent last-minute changes | Quick edit and update with instant sync across all views |
-
----
-
-### 🔎 Existing Solutions & Their Gaps
-
-Several tools currently exist in this space, but none adequately solve the complete problem:
-
-| Tool | What It Does | Critical Gap |
-|------|-------------|-------------|
-| **Google Trips** | Basic trip organization | Discontinued; no budget tracking |
-| **TripIt** | Parses booking emails | No day-wise planning; no budget; premium features locked |
-| **Notion / Docs** | Flexible document creation | No structure; no budget; no sharing without account |
-| **Airbnb / Booking.com** | Accommodation booking only | Does not cover activities, budget, or full itinerary |
-| **Excel / Sheets** | Budget tracking | No itinerary structure; not mobile-friendly; not shareable easily |
-| **WhatsApp Groups** | Group communication | Not a planning tool; information gets buried in chat |
-
-**The gap is clear:** No existing free solution combines structured day-wise itinerary planning, integrated budget tracking, activity management, and shareable public links in a single, user-friendly platform.
-
----
-
-## 💡 Proposed Solution
-
-### 🚀 Solution Overview
-
-**SafarSathi** is a purpose-built, full stack web application that serves as a **single source of truth for the entire travel planning lifecycle** — from the initial idea to post-trip reference.
-
-It is designed around one core principle:
-
-> **Every piece of information a traveler needs should live in one place, be accessible from any device, and be shareable with anyone — with or without an account.**
-
----
-
-### ✅ How SafarSathi Solves Each Problem
-
-| # | Problem | SafarSathi Solution |
-|---|---------|---------------------|
-| 1 | Fragmented tools | Single platform covering itinerary, hotels, activities, budget, and sharing |
-| 2 | No budget visibility | Real-time budget tracker with category breakdown and over-budget alerts |
-| 3 | Unstructured itinerary | Day-wise planner with typed activities, time slots, locations, and notes |
-| 4 | Hard to share plans | One-click public shareable link — no login required for viewers |
-| 5 | No trip history | Personal dashboard with all past, ongoing, and upcoming trips archived |
-
----
-
-### 🏆 Key Differentiators
-
-What makes SafarSathi stand out from existing solutions:
-
-```
-  ┌──────────────────────────────────────────────────────────────────┐
-  │                    TRIPPLANNER ADVANTAGES                        │
-  ├──────────────────────────────────────────────────────────────────┤
-  │                                                                  │
-  │  🆓  Completely free — no premium tier, no feature locks         │
-  │                                                                  │
-  │  📅  Structured day-wise planner — not just a list of notes      │
-  │                                                                  │
-  │  💰  Integrated budget tracker tied to actual trip activities    │
-  │                                                                  │
-  │  🔗  Public shareable link — viewers need zero account           │
-  │                                                                  │
-  │  🌙  Dark / Light mode — comfortable planning at any hour        │
-  │                                                                  │
-  │  📱  Fully responsive — works on mobile, tablet, and desktop     │
-  │                                                                  │
-  │  🔒  Secure — JWT authentication with protected routes           │
-  │                                                                  │
-  └──────────────────────────────────────────────────────────────────┘
+safarsathi/
+├── backend/
+│   ├── config/
+│   │   └── db.js                  # MongoDB connection
+│   ├── controllers/
+│   │   ├── authController.js      # Register, login, profile
+│   │   ├── tripController.js      # Trip CRUD with search/filter/pagination
+│   │   ├── activityController.js  # Activity CRUD
+│   │   ├── expenseController.js   # Expense CRUD with summary
+│   │   └── publicController.js    # Public trip view by token
+│   ├── middleware/
+│   │   ├── authMiddleware.js      # JWT verification
+│   │   └── errorMiddleware.js     # Global error handler
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Trip.js
+│   │   ├── Activity.js
+│   │   └── Expense.js
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   ├── tripRoutes.js
+│   │   ├── activityRoutes.js
+│   │   ├── expenseRoutes.js
+│   │   ├── publicRoutes.js
+│   │   └── index.js
+│   ├── .env
+│   ├── server.js
+│   └── package.json
+│
+└── frontend/
+    ├── public/
+    ├── src/
+    │   ├── components/
+    │   │   ├── Navbar.jsx
+    │   │   ├── ProtectedRoute.jsx
+    │   │   ├── TripCard.jsx
+    │   │   ├── Pagination.jsx
+    │   │   ├── BudgetChart.jsx
+    │   │   ├── ActivityCard.jsx
+    │   │   ├── ExpenseTable.jsx
+    │   │   └── ConfirmModal.jsx
+    │   ├── context/
+    │   │   └── ThemeContext.jsx
+    │   ├── hooks/
+    │   │   ├── useDebounce.js
+    │   │   └── useScrollAnimation.jsx
+    │   ├── pages/
+    │   │   ├── Home.jsx
+    │   │   ├── Login.jsx
+    │   │   ├── Register.jsx
+    │   │   ├── Dashboard.jsx
+    │   │   ├── CreateTrip.jsx
+    │   │   ├── TripDetails.jsx
+    │   │   ├── Trips.jsx
+    │   │   └── PublicTripView.jsx
+    │   ├── redux/
+    │   │   ├── store.js
+    │   │   ├── authSlice.js
+    │   │   ├── tripSlice.js
+    │   │   ├── activitySlice.js
+    │   │   └── expenseSlice.js
+    │   ├── services/
+    │   │   └── api.js
+    │   ├── App.jsx
+    │   ├── main.jsx
+    │   └── index.css
+    ├── tailwind.config.js
+    ├── vite.config.js
+    └── package.json
 ```
 
 ---
 
-## 🏗️ Technical Approach
+## Prerequisites
 
-To deliver this solution reliably and at scale, SafarSathi is architected using a proven modern full stack:
-
-```
-  ┌─────────────────────────────────────────────────────────────┐
-  │                    SYSTEM ARCHITECTURE                      │
-  └─────────────────────────────────────────────────────────────┘
-
-  ┌──────────────────────┐         ┌──────────────────────────┐
-  │     FRONTEND         │  HTTP   │        BACKEND           │
-  │                      │ ──────► │                          │
-  │  React.js            │  REST   │  Node.js + Express.js    │
-  │  Tailwind CSS        │  API    │  JWT Authentication      │
-  │  Redux Toolkit       │ ◄────── │  Input Validation        │
-  │  React Router DOM    │  JSON   │  Error Middleware        │
-  │  Axios               │         │                          │
-  └──────────────────────┘         └────────────┬─────────────┘
-                                                │
-                                                │ Mongoose ODM
-                                                ▼
-                                   ┌────────────────────────┐
-                                   │       DATABASE         │
-                                   │                        │
-                                   │  MongoDB               │
-                                   │  Collections:          │
-                                   │   • Users              │
-                                   │   • Trips              │
-                                   │   • Activities         │
-                                   │   • Expenses           │
-                                   └────────────────────────┘
-```
-
-| Layer | Technology | Justification |
-|-------|-----------|--------------|
-| **Frontend** | React.js 18 + Tailwind CSS | Component reusability, fast rendering, utility-first responsive design |
-| **State Management** | Redux Toolkit | Predictable global state for auth, trips, and theme across all pages |
-| **Routing** | React Router DOM v6 | Declarative client-side routing with protected route support |
-| **Backend** | Node.js + Express.js | Non-blocking I/O, lightweight API layer, excellent ecosystem |
-| **Database** | MongoDB + Mongoose | Flexible document schema ideal for nested trip/day/activity structure |
-| **Authentication** | JWT + LocalStorage | Stateless, scalable auth without server-side session management |
-| **HTTP Client** | Axios | Interceptor support for global token injection and error handling |
+- Node.js v18 or above
+- npm v9 or above
+- MongoDB Atlas account (or local MongoDB)
 
 ---
 
-## 📈 Success Metrics
+## Installation and Setup
 
-The success of SafarSathi will be measured against the following criteria:
+### 1. Clone the Repository
 
-```
-  ✅  A user can create a complete trip with days, activities,
-      and budget in under 5 minutes
-
-  ✅  A shared trip link is accessible to anyone without login
-      and loads within 2 seconds
-
-  ✅  Budget tracker accurately reflects all expenses in real time
-      with category-wise breakdown
-
-  ✅  All CRUD operations (Create, Read, Update, Delete) work
-      correctly across trips, activities, and expenses
-
-  ✅  The application is fully usable on mobile, tablet,
-      and desktop screen sizes
-
-  ✅  All protected routes correctly redirect unauthenticated
-      users to the login page
-
-  ✅  Search, filter, sort, and pagination work correctly
-      across the trips dashboard
+```bash
+git clone https://github.com/mananjani2102/safarsathi.git
+cd safarsathi
 ```
 
+### 2. Backend Setup
+
+```bash
+cd backend
+npm install
+```
+
+Create a `.env` file in the `backend` folder:
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_atlas_connection_string
+JWT_SECRET=your_jwt_secret_key
+NODE_ENV=development
+```
+
+Start the backend server:
+
+```bash
+npm run dev
+```
+
+Backend will run at `http://localhost:5000`
+
+### 3. Frontend Setup
+
+```bash
+cd frontend
+npm install
+```
+
+Create a `.env` file in the `frontend` folder:
+
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+Start the frontend:
+
+```bash
+npm run dev
+```
+
+Frontend will run at `http://localhost:3000`
+
 ---
 
-<div align="center">
+## Environment Variables
+
+### Backend
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `PORT` | Server port | `5000` |
+| `MONGO_URI` | MongoDB connection string | `mongodb+srv://...` |
+| `JWT_SECRET` | Secret key for JWT signing | `your_secret_key` |
+| `NODE_ENV` | Environment mode | `development` or `production` |
+
+### Frontend
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `VITE_API_URL` | Backend API base URL | `http://localhost:5000/api` |
 
 ---
 
-**✈️ SafarSathi**
+## API Documentation
 
-*Plan better. Travel smarter. Share easily.*
+### Base URL
 
-Built with ❤️ for the Full Stack Hackathon Event
+```
+http://localhost:5000/api
+```
 
 ---
 
-</div>
+### Auth Routes — `/api/auth`
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| POST | `/auth/register` | Register new user | No |
+| POST | `/auth/login` | Login and get JWT token | No |
+| GET | `/auth/profile` | Get logged in user profile | Yes |
+
+**Register Request:**
+```json
+{
+  "name": "Manan Jani",
+  "email": "manan@example.com",
+  "password": "password123"
+}
+```
+
+**Login Response:**
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "_id": "64abc...",
+    "name": "Manan Jani",
+    "email": "manan@example.com"
+  }
+}
+```
+
+---
+
+### Trip Routes — `/api/trips`
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| GET | `/trips` | Get all trips (search, filter, sort, paginate) | Yes |
+| POST | `/trips` | Create new trip | Yes |
+| GET | `/trips/:id` | Get single trip | Yes |
+| PUT | `/trips/:id` | Update trip | Yes |
+| DELETE | `/trips/:id` | Delete trip | Yes |
+
+**Query Parameters for GET `/trips`:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `search` | string | Search by title or destination |
+| `status` | string | Filter by upcoming, ongoing, completed |
+| `sort` | string | newest, oldest, budget_high, budget_low |
+| `page` | number | Page number (default: 1) |
+| `limit` | number | Items per page (default: 6) |
+
+**GET `/trips` Response:**
+```json
+{
+  "trips": [...],
+  "totalTrips": 18,
+  "totalPages": 3,
+  "currentPage": 1
+}
+```
+
+**Create Trip Request:**
+```json
+{
+  "title": "Goa Beach Trip",
+  "destination": "Goa, India",
+  "startDate": "2024-12-20",
+  "endDate": "2024-12-27",
+  "totalBudget": 25000
+}
+```
+
+---
+
+### Activity Routes — `/api/activities`
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| GET | `/activities/:tripId` | Get all activities for a trip | Yes |
+| POST | `/activities` | Add activity to trip | Yes |
+| PUT | `/activities/:id` | Update activity | Yes |
+| DELETE | `/activities/:id` | Delete activity | Yes |
+
+**Create Activity Request:**
+```json
+{
+  "tripId": "64abc...",
+  "day": 1,
+  "title": "Beach Walk",
+  "location": "Calangute Beach",
+  "time": "07:00",
+  "category": "sightseeing",
+  "cost": 0,
+  "notes": "Morning walk along the beach"
+}
+```
+
+---
+
+### Expense Routes — `/api/expenses`
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| GET | `/expenses/:tripId` | Get all expenses for a trip | Yes |
+| POST | `/expenses` | Add expense | Yes |
+| PUT | `/expenses/:id` | Update expense | Yes |
+| DELETE | `/expenses/:id` | Delete expense | Yes |
+
+**Create Expense Request:**
+```json
+{
+  "tripId": "64abc...",
+  "title": "Hotel Stay",
+  "amount": 4500,
+  "category": "hotel",
+  "date": "2024-12-20"
+}
+```
+
+---
+
+### Public Routes — `/api/public`
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| GET | `/public/trip/:id` | Get public trip view by trip ID | No |
+
+---
+
+## Error Handling
+
+All API errors return a consistent JSON response:
+
+```json
+{
+  "message": "Error description here"
+}
+```
+
+| Status Code | Meaning |
+|-------------|---------|
+| `400` | Bad request — missing or invalid input |
+| `401` | Unauthorized — invalid or missing token |
+| `404` | Not found — resource does not exist |
+| `500` | Internal server error |
+
+The backend uses a global error middleware (`errorMiddleware.js`) to catch and format all errors consistently. The frontend uses Axios interceptors to handle API errors and displays them via toast notifications.
+
+---
+
+## Deployment
+
+### Backend — Render
+
+1. Go to [render.com](https://render.com) and create a new Web Service.
+2. Connect the GitHub repository.
+3. Set the following:
+   - Root Directory: `backend`
+   - Build Command: `npm install`
+   - Start Command: `node server.js`
+4. Add environment variables in the Render dashboard:
+   - `MONGO_URI`
+   - `JWT_SECRET`
+   - `NODE_ENV=production`
+   - `PORT=5000`
+
+### Frontend — Vercel
+
+1. Go to [vercel.com](https://vercel.com) and import the GitHub repository.
+2. Set the following:
+   - Framework: Vite
+   - Root Directory: `frontend`
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+3. Add environment variable:
+   - `VITE_API_URL=https://your-backend.onrender.com/api`
+
+### Database — MongoDB Atlas
+
+1. Create a free M0 cluster on [MongoDB Atlas](https://www.mongodb.com/atlas).
+2. Create a database user with read/write access.
+3. Whitelist all IPs (`0.0.0.0/0`) for Render compatibility.
+4. Copy the connection string and set it as `MONGO_URI`.
+
+---
+
+## Future Improvements
+
+- Edit trip and activity functionality
+- Email notifications for upcoming trips
+- Google Maps integration for activity locations
+- Collaborative trip planning with multiple users
+- Export itinerary as PDF
+- Mobile app using React Native
+
+---
+
+## Contributing
+
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature/your-feature-name`
+3. Make your changes and commit: `git commit -m "feat: describe your change"`
+4. Push to your fork: `git push origin feature/your-feature-name`
+5. Open a Pull Request to `codinggita/safarsathi` — `main` branch.
+
+Please ensure your code follows existing patterns, has no console errors, and is tested before submitting a PR.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+## Author
+
+**Manan Jani**
+
+Built with dedication for the Full Stack Hackathon — CodingGita.
