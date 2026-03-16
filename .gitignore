@@ -118,3 +118,11 @@ dist
 .pnp.*
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Node
+
+image/
+video/
+stitch_design.html
+frontend/dist/
+frontend/node_modules/
+backend/node_modules/
+.env
