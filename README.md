@@ -12,6 +12,7 @@
 
 ## Overview
 
+
 SafarSathi is a full stack travel itinerary planning web application. It consolidates trip planning, activity scheduling, budget tracking, and itinerary sharing into a single platform — replacing the need for multiple disconnected tools.
 
 Built with React.js, Node.js, Express.js, and MongoDB as part of a Full Stack Hackathon project.
