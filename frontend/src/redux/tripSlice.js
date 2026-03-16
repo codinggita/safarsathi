@@ -68,6 +68,7 @@ const tripSlice = createSlice({
     currentTrip: null,
     totalPages: 1,
     currentPage: 1,
+    totalTrips: 0,
     loading: false,
     error: null,
   },
@@ -87,9 +88,14 @@ const tripSlice = createSlice({
       })
       .addCase(fetchTrips.fulfilled, (state, action) => {
         state.loading = false;
-        state.trips = action.payload.data;
+        // Fix: backend returns trips or data key
+        state.trips =
+          action.payload.trips ||
+          action.payload.data ||
+          [];
         state.totalPages = action.payload.totalPages || 1;
         state.currentPage = action.payload.currentPage || 1;
+        state.totalTrips = action.payload.totalTrips || 0;
       })
       .addCase(fetchTrips.rejected, (state, action) => {
         state.loading = false;
@@ -111,12 +117,17 @@ const tripSlice = createSlice({
         state.trips.unshift(action.payload);
       })
       .addCase(updateTrip.fulfilled, (state, action) => {
-        const index = state.trips.findIndex((t) => t._id === action.payload._id);
+        const index = state.trips.findIndex(
+          (t) => t._id === action.payload._id
+        );
         if (index !== -1) state.trips[index] = action.payload;
-        if (state.currentTrip?._id === action.payload._id) state.currentTrip = action.payload;
+        if (state.currentTrip?._id === action.payload._id)
+          state.currentTrip = action.payload;
       })
       .addCase(deleteTrip.fulfilled, (state, action) => {
-        state.trips = state.trips.filter((t) => t._id !== action.payload);
+        state.trips = state.trips.filter(
+          (t) => t._id !== action.payload
+        );
       });
   },
 });
